@@ -1,5 +1,6 @@
+var sequelize = require('./init_sequelize');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('postgres://@0.0.0.0:5432/finance_development');
+var SequelizingSet = require('./sequelizingSet');
 
 var DailyStock = sequelize.define('daily_stock_description', {
   day: {
@@ -34,22 +35,7 @@ var DailyStock = sequelize.define('daily_stock_description', {
 });
 
 DailyStock.daily = DailyStock.findAll().then( (stocks) => {
-  return stocks.map( (stock) => {
-    Object.keys(stock.dataValues).forEach( (el) => {
-      if (!['day', 'open', 'high', 'low', 'close', 'volume', 'adj'].includes(el)) {
-        delete stock.dataValues[el];
-      }
-      else if (el === 'day') {
-        stock.dataValues[el] = new Date(stock.dataValues[el])
-          .toISOString()
-          .replace(/T.*/, ' ')
-          .split('-')
-          .join('')
-          .trim();
-      }
-    });
-    return stock.dataValues;
-  });
+  return stocks.map( (stock) => { return SequelizingSet.setValues(stock); });
 });
 
 module.exports = DailyStock;
