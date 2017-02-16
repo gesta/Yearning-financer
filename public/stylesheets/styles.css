@@ -1,0 +1,20 @@
+.axis--x path {
+    display: none;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.area {
+    fill: steelblue;
+    clip-path: url(#clip);
+}
+
+.zoom {
+    cursor: move;
+    fill: none;
+    pointer-events: all;
+}
