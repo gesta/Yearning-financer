@@ -1,0 +1,43 @@
+CREATE DATABASE finance_development;
+
+CREATE TABLE daily_stock_descriptions(
+    id SERIAL              NOT NULL,
+    day date               NOT NULL,
+    open numeric           NOT NULL,
+    high numeric           NOT NULL,
+    low numeric            NOT NULL,
+    close numeric          NOT NULL,
+    volume numeric         NOT NULL,
+    adj numeric            NOT NULL,
+    created_at timestamp NOT NULL DEFAULT now(),
+    updated_at timestamp NOT NULL DEFAULT now()
+);
+COPY daily_stock_descriptions(day, open, high, low, close, volume, adj) FROM '<file_path>' DELIMITER ',' CSV;
+
+CREATE TABLE monthly_stock_descriptions(
+    id SERIAL              NOT NULL,
+    day date               NOT NULL,
+    open numeric           NOT NULL,
+    high numeric           NOT NULL,
+    low numeric            NOT NULL,
+    close numeric          NOT NULL,
+    volume numeric         NOT NULL,
+    adj numeric            NOT NULL,
+    created_at timestamp NOT NULL DEFAULT now(),
+    updated_at timestamp NOT NULL DEFAULT now()
+);
+COPY monthly_stock_descriptions(day, open, high, low, close, volume, adj) FROM '<file_path>' DELIMITER ',' CSV;
+
+CREATE TABLE weekly_stock_descriptions(
+    id SERIAL              NOT NULL,
+    day date               NOT NULL,
+    open numeric           NOT NULL,
+    high numeric           NOT NULL,
+    low numeric            NOT NULL,
+    close numeric          NOT NULL,
+    volume numeric         NOT NULL,
+    adj numeric            NOT NULL,
+    created_at timestamp NOT NULL DEFAULT now(),
+    updated_at timestamp NOT NULL DEFAULT now()
+);
+COPY weekly_stock_descriptions(day, open, high, low, close, volume, adj) FROM '<file_path>' DELIMITER ',' CSV;
