@@ -1,4 +1,6 @@
-var DailyStock = require('./ar');
+var DailyStock = require('./DailyStock');
+var MonthlyStock = require('./MonthlyStock');
+var WeeklyStock = require('./WeeklyStock');
 var d3 = require('d3');
 var path = require('path');
 var express = require('express');
@@ -11,12 +13,36 @@ server.use(express.static(path.join(__dirname, 'public')));
 //server.use(bodyParser.json());
 
 server.get('/', (_, res) => {
-  res.render('index.jade');
+  res.redirect('/daily');
 });
 
 server.get('/daily', (_, res) => {
+  res.render('daily.jade');
+});
+
+server.get('/monthly', (_, res) => {
+  res.render('monthly.jade');
+});
+
+server.get('/weekly', (_, res) => {
+  res.render('weekly.jade');
+});
+
+server.get('/daily_json', (_, res) => {
   res.json({
     daily: DailyStock.daily.value()
+  });
+});
+
+server.get('/monthly_json', (_, res) => {
+  res.json({
+    daily: MonthlyStock.monthly.value()
+  });
+});
+
+server.get('/weekly_json', (_, res) => {
+  res.json({
+    daily: WeeklyStock.weekly.value()
   });
 });
 
