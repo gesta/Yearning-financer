@@ -1,16 +1,13 @@
-var DailyStock = require('./lib/DailyStock');
-var MonthlyStock = require('./lib/MonthlyStock');
-var WeeklyStock = require('./lib/WeeklyStock');
-var d3 = require('d3');
-var path = require('path');
-var express = require('express');
-var server = express();
-//var http = require('http');
-//var bodyParser = require('body-parser');
+const DailyStock = require('./lib/DailyStock');
+const MonthlyStock = require('./lib/MonthlyStock');
+const WeeklyStock = require('./lib/WeeklyStock');
+const d3 = require('d3');
+const path = require('path');
+const express = require('express');
+const server = express();
+const https = require('https');
 
 server.use(express.static(path.join(__dirname, 'public')));
-//server.use(bodyParser.urlencoded({extended: true}));
-//server.use(bodyParser.json());
 
 server.get('/', (_, res) => {
   res.redirect('/daily');
