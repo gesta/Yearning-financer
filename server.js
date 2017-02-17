@@ -6,6 +6,7 @@ const path = require('path');
 const express = require('express');
 const server = express();
 const https = require('https');
+const cron = require('node-cron');
 
 server.use(express.static(path.join(__dirname, 'public')));
 
@@ -41,6 +42,10 @@ server.get('/weekly_json', (_, res) => {
   res.json({
     daily: WeeklyStock.weekly.value()
   });
+});
+
+cron.schedule('* 8 * * *', function(){
+  getTodayStocks();
 });
 
 var formatDate = (utcDate) => {
